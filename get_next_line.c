@@ -6,17 +6,61 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 14:23:51 by mring             #+#    #+#             */
-/*   Updated: 2024/11/18 15:17:13 by mring            ###   ########.fr       */
+/*   Updated: 2024/11/25 12:31:21 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	get_next_line(void)
+char	*readline(int fd, char *buffer)
 {
-	static char	buf[BUFFER_SIZE + 1];
+	int		amountread;
+	int		nextread;
+
+	while (amountread > 0)
+	{
+		amountread = read(fd, buffer, BUFFER_SIZE);
+		if (amountread < 0)
+		{
+			buffer[0] = '\0';
+			return (NULL);
+		}
+
+			return (NULL);
+	}
 }
 
+char	*get_next_line(int fd)
+{
+	static char	buf[BUFFER_SIZE + 1];
+	char *line;
+	char *nextline;
+
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	line = ft_strjoin(line, buf, BUFFER_SIZE);
+	// line = readline(fd, buf);
+
+	
+	return (line);
+
+}
+
+#include <stdio.h>
+#include <fcntl.h>
+
+int	main(void)
+{
+	char	*line;
+	int		fd;
+
+	fd = open("testfile.txt", O_RDONLY);
+	while ((line = get_next_line(fd)) != NULL) {
+		printf("%s", line);
+		free(line);
+	}
+	close(fd);
+}
 /*
 
 FORBIDDEN:

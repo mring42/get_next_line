@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 14:23:56 by mring             #+#    #+#             */
-/*   Updated: 2024/11/25 12:29:17 by mring            ###   ########.fr       */
+/*   Updated: 2024/11/25 17:16:20 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 size_t	ft_strlen(const char *s)
 {
-	size_t	i;;
+	size_t	i;
 
 	i = 0;
-	while(s[i])
+	while (s[i])
 		i++;
 	return (i);
 }
 
 char	*ft_strchr(const char *s, int c)
 {
-	while(*s)
+	while (*s)
 	{
 		if (*s == (char)c)
 			return ((char *)s);
@@ -33,7 +33,7 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstlen)
+void	ft_strlcpy(char *dst, const char *src, size_t dstlen)
 {
 	size_t	i;
 
@@ -44,13 +44,13 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstlen)
 		i++;
 	}
 	dst[i] = '\0';
-	return (dstlen);
 }
 
 char	*ft_strdup(const char *s)
 {
 	char	*dst;
 	size_t	len;
+
 	len = ft_strlen(s) + 1;
 	dst = malloc(len);
 	if (dst == NULL)
@@ -59,22 +59,21 @@ char	*ft_strdup(const char *s)
 	return (dst);
 }
 
-char	*ft_strjoin(char *str1, char const *str2, size_t len)
+char	*ft_strjoin(char *str1, char const *str2, int amountread)
 {
-	char *newstr;
+	char	*newstr;
 	size_t	str1_len;
 	size_t	str2_len;
 
 	if (!str1 || !str2)
 		return (NULL);
 	str1_len = ft_strlen(str1);
-	str2_len = ft_strlen(str2);
-	printf("%d, %d", str2_len, len);
+	str2_len = amountread;
 	newstr = malloc(str1_len + str2_len + 1);
 	if (!newstr)
 		return (NULL);
 	ft_strlcpy(newstr, str1, str1_len + 1);
 	ft_strlcpy((newstr + str1_len), str2, str2_len + 1);
 	free(str1);
-	return (newstr);	
+	return (newstr);
 }

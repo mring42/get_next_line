@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 14:23:51 by mring             #+#    #+#             */
-/*   Updated: 2024/11/26 18:22:09 by mring            ###   ########.fr       */
+/*   Updated: 2024/11/26 18:28:32 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_strchr(const char *s, int c)
 {
@@ -50,21 +50,21 @@ char	*readline(int fd, char *buffer, char *line)
 
 char	*get_next_line(int fd)
 {
-	static char	buffer[BUFFER_SIZE + 1];
+	static char	buffer[OPEN_MAX][BUFFER_SIZE + 1];
 	char		*line;
 	char		*nextline;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	line = ft_strdup(buffer);
+	line = ft_strdup(buffer[fd]);
 	if (!line)
 		return (NULL);
-	line = readline(fd, buffer, line);
+	line = readline(fd, buffer[fd], line);
 	if (!line)
 		return (NULL);
 	nextline = ft_strchr(line, '\n');
 	if (nextline != NULL)
-		return (ft_strlcpy(buffer, nextline + 1, BUFFER_SIZE + 1),
+		return (ft_strlcpy(buffer[fd], nextline + 1, BUFFER_SIZE + 1),
 			nextline = ft_substr(line, 0, nextline - line + 1), free(line),
 			nextline);
 	else
@@ -72,7 +72,7 @@ char	*get_next_line(int fd)
 		if (!ft_strlen(line))
 			return (free(line), NULL);
 		line[ft_strlen(line)] = '\0';
-		buffer[0] = '\0';
+		buffer[fd][0] = '\0';
 	}
 	return (line);
 }

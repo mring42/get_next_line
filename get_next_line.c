@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 14:23:51 by mring             #+#    #+#             */
-/*   Updated: 2024/11/26 18:22:09 by mring            ###   ########.fr       */
+/*   Updated: 2024/12/05 11:29:10 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*readline(int fd, char *buffer, char *line)
 			return (NULL);
 		}
 		buffer[amountread] = '\0';
-		buff = ft_strjoin(line, buffer, amountread);
+		buff = ft_strjoin(line, buffer);
 		if (!buff)
 			return (free(line), NULL);
 		free(line);

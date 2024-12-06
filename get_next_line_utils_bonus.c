@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 14:23:56 by mring             #+#    #+#             */
-/*   Updated: 2024/11/26 18:28:37 by mring            ###   ########.fr       */
+/*   Updated: 2024/12/05 11:28:28 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,12 @@ char	*ft_strdup(const char *s)
 	return (dst);
 }
 
-char	*ft_strjoin(char *str1, char const *str2, int amountread)
+char	*ft_strjoin(char *str1, char const *str2)
 {
 	char	*newstr;
 	size_t	str1_len;
 	size_t	str2_len;
 
-	(void)amountread;
 	if (!str1 || !str2)
 		return (NULL);
 	str1_len = ft_strlen(str1);
